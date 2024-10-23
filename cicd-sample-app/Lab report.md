@@ -1,6 +1,12 @@
+Certainly! If you create a folder called `images` in your GitHub repository and place all your image files into this folder, you'll need to update the image paths in your Markdown file to point to the images within the `images` folder.
+
+Here's how your Markdown would look:
+
+---
+
 # Lab Report: Continuous Integration/Delivery with Jenkins
 
-In this lab assignment, we set up a build pipeline using Jenkins and Docker to automate the building, testing, and deployment of a sample application. The following report documents the steps taken, including configurations, commands used, and screenshots of the process.
+In this lab assignment, we set up a build pipeline using Jenkins and Docker to automate the building, testing, and deployment of a sample application. This report documents the steps taken, including configurations, commands used, and screenshots of the process.
 
 ---
 
@@ -22,6 +28,7 @@ In this lab assignment, we set up a build pipeline using Jenkins and Docker to a
   - [7.1. Using a Jenkinsfile](#71-using-a-jenkinsfile)
 - [8. Making a Change in the Application](#8-making-a-change-in-the-application)
 - [Reflection](#reflection)
+- [Screenshots](#screenshots)
 
 ---
 
@@ -45,7 +52,7 @@ git config --global user.email "your.email@example.com"
 git config --global --list
 ```
 
-![Git Config Globals](git_config_globals.png)
+![Git Config Globals](images/git_config_globals.png)
 
 ### 1.2. Creating a GitHub Repository
 
@@ -71,7 +78,7 @@ We created a new Git repository for the sample application.
   git push -u origin main
   ```
 
-![New GitHub Repository](new_git_repo.png)
+![New GitHub Repository](images/new_git_repo.png)
 
 ---
 
@@ -94,7 +101,7 @@ We created a new Git repository for the sample application.
 
   Accessed [http://192.168.56.20:5050/](http://192.168.56.20:5050/) and saw:
 
-  ![Application Running](reach_page_through_docker.png)
+  ![Application Running](images/reach_page_through_docker.png)
 
 - **Stopped and removed the container:**
 
@@ -124,7 +131,7 @@ We created a new Git repository for the sample application.
     --name jenkins_server jenkins/jenkins:lts
   ```
 
-![Starting Jenkins](starting_jenkins.png)
+![Starting Jenkins](images/starting_jenkins.png)
 
 - **Recorded the initial admin password for Jenkins.**
 
@@ -146,13 +153,13 @@ We created a new Git repository for the sample application.
 
 - **Created a new freestyle project named `BuildSampleApp`.**
 
-  ![Create Job in Jenkins](create_job_jenkins.png)
+  ![Create Job in Jenkins](images/create_job_jenkins.png)
 
 ### 5.2. Configuring Build Steps
 
 - **Set up Source Code Management to use Git and specified the repository URL.**
 
-  ![Jenkins Build Steps](jenkins_build_steps.png)
+  ![Jenkins Build Steps](images/jenkins_build_steps.png)
 
 - **Changed the branch specifier to `*/main`.**
 - **Added a build step to execute the shell command:**
@@ -166,7 +173,7 @@ We created a new Git repository for the sample application.
 - **Ran the build job by clicking `Build Now`.**
 - **Verified that the application is running by accessing it in the browser.**
 
-  ![Application Running After Build](you_are_calling_from.png)
+  ![Application Running After Build](images/you_are_calling_from.png)
 
 ---
 
@@ -175,7 +182,7 @@ We created a new Git repository for the sample application.
 - **Created a new freestyle project named `TestSampleApp`.**
 - **Configured it to build after `BuildSampleApp` completes.**
 
-  ![TestSampleApp Build Triggers](testsampleapp_build_triggers.png)
+  ![TestSampleApp Build Triggers](images/testsampleapp_build_triggers.png)
 
 - **Added a build step to execute the shell command to test the application:**
 
@@ -188,7 +195,7 @@ We created a new Git repository for the sample application.
 
 - **Ran the test job and verified that it succeeded.**
 
-  ![TestSampleApp Builds](testsampleapp_builds.png)
+  ![TestSampleApp Builds](images/testsampleapp_builds.png)
 
 ---
 
@@ -196,7 +203,7 @@ We created a new Git repository for the sample application.
 
 - **Created a new pipeline job named `SampleAppPipelineWithJenkinsfile`.**
 
-  ![Creating Pipeline with Jenkinsfile](creating_pipeline_with_jenkinsfile.png)
+  ![Creating Pipeline with Jenkinsfile](images/creating_pipeline_with_jenkinsfile.png)
 
 ### 7.1. Using a Jenkinsfile
 
@@ -221,11 +228,11 @@ We created a new Git repository for the sample application.
 
 - **Configured the pipeline to use the Jenkinsfile from SCM:**
 
-  ![Definition Pipeline with Jenkinsfile](definition_pipeline_with_jenkinsfile.png)
+  ![Definition Pipeline with Jenkinsfile](images/definition_pipeline_with_jenkinsfile.png)
 
 - **Ran the pipeline and verified that it succeeded.**
 
-  ![Pipeline Succeeds](pipeline_succeeds.png)
+  ![Pipeline Succeeds](images/pipeline_succeeds.png)
 
 ---
 
@@ -247,15 +254,15 @@ We created a new Git repository for the sample application.
   git push
   ```
 
-  ![Add Jenkinsfile to Git](add_jenkinsfile_to_git.png)
+  ![Add Jenkinsfile to Git](images/add_jenkinsfile_to_git.png)
 
 - **Ran the pipeline again in Jenkins.**
 
-  ![Automated Pipeline Succeeds](automated_pipeline_succeeds.png)
+  ![Automated Pipeline Succeeds](images/automated_pipeline_succeeds.png)
 
 - **Verified that the application reflects the changes:**
 
-  ![Background Color Changed](kleur_veranderd.png)
+  ![Background Color Changed](images/kleur_veranderd.png)
 
 ---
 
@@ -276,63 +283,63 @@ Below are the screenshots referenced throughout the lab report:
 
 1. **Git Config Globals**
 
-   ![Git Config Globals](git_config_globals.png)
+   ![Git Config Globals](images/git_config_globals.png)
 
 2. **New GitHub Repository**
 
-   ![New GitHub Repository](new_git_repo.png)
+   ![New GitHub Repository](images/new_git_repo.png)
 
 3. **Application Running**
 
-   ![Application Running](reach_page_through_docker.png)
+   ![Application Running](images/reach_page_through_docker.png)
 
 4. **Starting Jenkins**
 
-   ![Starting Jenkins](starting_jenkins.png)
+   ![Starting Jenkins](images/starting_jenkins.png)
 
 5. **Create Job in Jenkins**
 
-   ![Create Job in Jenkins](create_job_jenkins.png)
+   ![Create Job in Jenkins](images/create_job_jenkins.png)
 
 6. **Jenkins Build Steps**
 
-   ![Jenkins Build Steps](jenkins_build_steps.png)
+   ![Jenkins Build Steps](images/jenkins_build_steps.png)
 
 7. **Application Running After Build**
 
-   ![Application Running After Build](you_are_calling_from.png)
+   ![Application Running After Build](images/you_are_calling_from.png)
 
 8. **TestSampleApp Build Triggers**
 
-   ![TestSampleApp Build Triggers](testsampleapp_build_triggers.png)
+   ![TestSampleApp Build Triggers](images/testsampleapp_build_triggers.png)
 
 9. **TestSampleApp Builds**
 
-   ![TestSampleApp Builds](testsampleapp_builds.png)
+   ![TestSampleApp Builds](images/testsampleapp_builds.png)
 
 10. **Creating Pipeline with Jenkinsfile**
 
-    ![Creating Pipeline with Jenkinsfile](creating_pipeline_with_jenkinsfile.png)
+    ![Creating Pipeline with Jenkinsfile](images/creating_pipeline_with_jenkinsfile.png)
 
 11. **Definition Pipeline with Jenkinsfile**
 
-    ![Definition Pipeline with Jenkinsfile](definition_pipeline_with_jenkinsfile.png)
+    ![Definition Pipeline with Jenkinsfile](images/definition_pipeline_with_jenkinsfile.png)
 
 12. **Pipeline Succeeds**
 
-    ![Pipeline Succeeds](pipeline_succeeds.png)
+    ![Pipeline Succeeds](images/pipeline_succeeds.png)
 
 13. **Add Jenkinsfile to Git**
 
-    ![Add Jenkinsfile to Git](add_jenkinsfile_to_git.png)
+    ![Add Jenkinsfile to Git](images/add_jenkinsfile_to_git.png)
 
 14. **Automated Pipeline Succeeds**
 
-    ![Automated Pipeline Succeeds](automated_pipeline_succeeds.png)
+    ![Automated Pipeline Succeeds](images/automated_pipeline_succeeds.png)
 
 15. **Background Color Changed**
 
-    ![Background Color Changed](kleur_veranderd.png)
+    ![Background Color Changed](images/kleur_veranderd.png)
 
 ---
 
