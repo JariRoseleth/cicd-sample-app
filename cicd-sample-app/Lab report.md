@@ -209,7 +209,8 @@ We created a new Git repository for the sample application.
 
 - **Added a `Jenkinsfile` to the root of the repository:**
 
-  ```node {
+  ```
+  node {
     stage('Preparation') {
         catchError(buildResult: 'SUCCESS') {
             sh 'docker stop samplerunning || true'
