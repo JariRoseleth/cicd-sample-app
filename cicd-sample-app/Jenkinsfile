@@ -9,6 +9,6 @@ node {
         build 'BuildSampleApp'
     }
     stage('Test') {
-        build 'TestSampleApp'
+        build 'TestTSampleApp'
     }
 }
