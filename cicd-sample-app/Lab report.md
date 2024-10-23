@@ -223,7 +223,7 @@ We created a new Git repository for the sample application.
     stage('Test') {
         build 'TestTSampleApp'
     }
-}
+
 
   ```
 
