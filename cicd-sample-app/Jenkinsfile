@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        stage('Preparation') {
+            steps {
+                script {
+                    try {
+                        sh 'docker stop samplerunning || true'
+                        sh 'docker rm samplerunning || true'
+                    } catch (err) {
+                        echo "No running container to stop."
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'bash ./sample-app.sh'
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    RESPONSE = sh(returnStdout: true, script: 'curl -s http://APP_IP:5050/')
+                    echo "${RESPONSE}"
+                    if (!RESPONSE.contains("You are calling me from JENKINS_IP")) {
+                        error("Test failed.")
+                    }
+                }
+            }
+        }
+    }
+}
