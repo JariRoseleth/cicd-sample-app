@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'bash ./sample-app.sh'
+                sh 'bash ./cicd-sample-app/sample-app.sh'
             }
         }
         stage('Test') {
