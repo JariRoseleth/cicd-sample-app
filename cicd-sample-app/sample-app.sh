@@ -2,11 +2,6 @@
 set -euo pipefail
 
 
-# Remove existing tempdir if it exists
-rm -rf tempdir
-mkdir tempdir
-
-
 mkdir tempdir
 mkdir tempdir/templates
 mkdir tempdir/static
