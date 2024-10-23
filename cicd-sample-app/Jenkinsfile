@@ -9,6 +9,12 @@ pipeline {
                 cleanWs()
             }
         }
+        stage('Checkout') {
+            steps {
+                // Perform SCM checkout manually
+                checkout scm
+            }
+        }
         stage('Preparation') {
             steps {
                 script {
@@ -23,15 +29,21 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'bash ./cicd-sample-app/sample-app.sh'
+                dir('cicd-sample-app') {
+                    sh 'bash ./sample-app.sh'
+                }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    RESPONSE = sh(returnStdout: true, script: 'curl -s http://APP_IP:5050/')
+                    // Retrieve IP addresses dynamically or set them statically
+                    APP_IP = 'localhost'
+                    JENKINS_IP = sh(returnStdout: true, script: "hostname -I | awk '{print \$1}'").trim()
+
+                    RESPONSE = sh(returnStdout: true, script: "curl -s http://${APP_IP}:5050/")
                     echo "${RESPONSE}"
-                    if (!RESPONSE.contains("You are calling me from JENKINS_IP")) {
+                    if (!RESPONSE.contains("You are calling me from ${JENKINS_IP}")) {
                         error("Test failed.")
                     }
                 }
