@@ -1,53 +1,14 @@
-pipeline {
-    agent any
-    options {
-        skipDefaultCheckout true
+node {
+    stage('Preparation') {
+        catchError(buildResult: 'SUCCESS') {
+            sh 'docker stop samplerunning || true'
+            sh 'docker rm samplerunning || true'
+        }
     }
-    stages {
-        stage('Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
-        stage('Checkout') {
-            steps {
-                // Perform SCM checkout manually
-                checkout scm
-            }
-        }
-        stage('Preparation') {
-            steps {
-                script {
-                    try {
-                        sh 'docker stop samplerunning || true'
-                        sh 'docker rm samplerunning || true'
-                    } catch (err) {
-                        echo "No running container to stop."
-                    }
-                }
-            }
-        }
-        stage('Build') {
-            steps {
-                dir('cicd-sample-app') {
-                    sh 'bash ./sample-app.sh'
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    // Retrieve IP addresses dynamically or set them statically
-                    APP_IP = 'localhost'
-                    JENKINS_IP = sh(returnStdout: true, script: "hostname -I | awk '{print \$1}'").trim()
-
-                    RESPONSE = sh(returnStdout: true, script: "curl -s http://${APP_IP}:5050/")
-                    echo "${RESPONSE}"
-                    if (!RESPONSE.contains("You are calling me from ${JENKINS_IP}")) {
-                        error("Test failed.")
-                    }
-                }
-            }
-        }
+    stage('Build') {
+        build 'BuildSampleApp'
+    }
+    stage('Test') {
+        build 'TestSampleApp'
     }
 }
